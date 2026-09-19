@@ -21,7 +21,17 @@
  */
 void inner_product_mmm(float *C, float const *A, float const *B, int M, int N, int K)
 {
-    // Your code here
+    // mnk order
+    for (int i = 0; i < M; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            for (int k = 0; k < K; k++)
+            {
+                C[i * N + j] += A[i * K + k] * B[k * N + j]; // Matrices are flat lists (so no vanilla 2D indexing)
+            }
+        }
+    }
 }
 
 /**
@@ -45,5 +55,15 @@ void inner_product_mmm(float *C, float const *A, float const *B, int M, int N, i
  */
 void outer_product_mmm(float *C, float const *A, float const *B, int M, int N, int K)
 {
-    // Your code here
+    // kmn order
+    for (int k = 0; k < K; k++)
+    {
+        for (int i = 0; i < M; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+                C[i * N + j] += A[i * K + k] * B[k * N + j];
+            }
+        }
+    }
 }
